@@ -51,13 +51,13 @@ class LogLineRegexp(object):
     def __init__(self, regex, var, *args, **kwargs):
         """Constructor
 
-        :regexp: -- regular expression to match
-        :var: -- variable name to set, all non-keyword arguments are added to
-                 the list of variables
+        :param regexp: -- string, regular expression to match
+        :param var: -- string, variable name to set, all non-keyword arguments
+                       are added to the list of variables
         Keyword arguments:
-        :end: -- set regular expression as the end of time step item, if
-                 matches ItemEnd exception is risen.
-        :match: -- name of boolean variable to set in case of regular
+        :param end: -- boolean, set regular expression as the end of time step
+                       item, if matches EndOfItem exception is risen.
+        :match: -- string, name of boolean variable to set in case of regular
                    expression match
         """
         import re
@@ -85,8 +85,8 @@ class LogLineRegexp(object):
 
         In case of match set properties of object.
 
-        :line: -- line to match
-        :obj: -- object where properties as set
+        :param line: -- line to match
+        :param obj: -- object where properties as set
         """
         r = self._re.search(line)
         if r is None:
@@ -131,7 +131,7 @@ class LogItemParser(object):
         self._execution_time = -1
         self._clock_time = -1
 
-        # Regular expressions to different parts of item
+        # Regular expressions for different parts of item
         self._line_regexps = [
             LogLineRegexp('^ExecutionTime = (.+) s  ClockTime = (.+) s$',
                           'execution_time', 'clock_time', end=True),
